@@ -1,0 +1,11 @@
+extends layout
+
+block content
+  .container
+    input.form-control(type='text', name="address", placeholder='address')
+    button.btn.btn-lg.btn-primary.btn-block(type='changepassword') Change Password
+
+block content
+  .container
+    h2 Current User Listings
+    * self listings *

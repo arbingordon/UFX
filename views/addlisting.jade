@@ -1,0 +1,18 @@
+extends layout
+
+block content
+  .container
+    h2.form-signin-heading Add New Listing
+    input.form-control(type='text', name="shortdesc", placeholder='short description')
+    br
+    textarea.form-control(type='textarea', rows="5", name="longdesc", placeholder='long description')
+    br
+    input.form-control(type='text', name="address", placeholder='address')
+    br
+    input.form-control(type='number', name="price", placeholder='$.$$')
+    br
+    input.form-control(type='text', name="tags", placeholder='tag1,tag2')
+    br
+    input.form-control-file(type='file', name="newfile")
+    br
+    button.btn.btn-lg.btn-primary.btn-block(type='postlisting') Post Listing
