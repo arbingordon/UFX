@@ -34,12 +34,12 @@ userController.login = function(req, res) {
 
 // Go to user control panel
 userController.usercp = function(req, res) {
-  res.render('usercp');
+  res.render('usercp', { user : req.user });
 };
 
 // Go to add listing
 userController.addlisting = function(req, res) {
-  res.render('addlisting');
+  res.render('addlisting', { user : req.user });
 };
 
 // Post login
