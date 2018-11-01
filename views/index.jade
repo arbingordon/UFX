@@ -1,17 +1,19 @@
 extends layout
 
 block content
-  div.hero
-    h1 University Exchange
-    p A place where UF Students can buy and sell items.
-  .container.listings
-    - each listing in listings
-      .thumbnail
-        a(href="#")
-          h2= listing.shortdesc
-        h3= "$" + listing.price
-        form(action="/addlisting/"+listing.id +"?_method=DELETE" method="POST")
-          button(class="delete button" type="submit") Delete
+  .container
+    div.hero
+      h1 University Exchange
+      p A place where UF Students can buy and sell items.
+      .listings
+        - each listing in listings
+          div.card(style="width: 18rem;")
+            img(class="card-img-top", src="http://placekitten.com/280/150")
+            div.card-body
+              h5.card-title= listing.shortdesc
+              p.card-text= listing.longdesc
+              form(action="/addlisting/"+listing.id +"?_method=DELETE" method="POST")
+                button.btn.btn-primary(type="submit") Delete
 
-  button.btn.btn-primary.btn(type='prev') <
-  button.btn.btn-primary.btn(type='next') >
+    button.btn.btn-primary.btn(type='prev') <
+    button.btn.btn-primary.btn(type='next') >

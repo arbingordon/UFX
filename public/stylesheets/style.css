@@ -37,8 +37,19 @@ body {
   border-top-right-radius: 0;
 }
 
-.thumbnail {
-  display: inline-block;
-  width: 20%;
-  min-height: 140px;
+.container {
+  margin: 20px auto;
+}
+.container .listings {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-content: stretch;
+  padding-bottom: 20px;
+}
+.card {
+  display: block;
+  float: left;
+  flex: 0 0 auto;
 }
