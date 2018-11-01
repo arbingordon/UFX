@@ -9,7 +9,7 @@ var userController = {};
 userController.home = function(req, res) {
   Listing.find({}, function (err, listings) {
     if (err) console.log(err);
-    else res.render("index", { listings: listings, user: req.user });
+    else res.render("index", { listings: listings });
   });
 };
 
@@ -22,7 +22,7 @@ userController.register = function(req, res) {
 userController.doRegister = function(req, res) {
   User.register(new User({ username : req.body.username, name: req.body.name }), req.body.password, function(err, user) {
     if (err) {
-      return res.render('register', { user : user });
+      return res.render('register');
     }
 
     passport.authenticate('local')(req, res, function () {
@@ -33,17 +33,17 @@ userController.doRegister = function(req, res) {
 
 // Go to login page
 userController.login = function(req, res) {
-  res.render('login', { user : req.user });
+  res.render('login');
 };
 
 // Go to user control panel
 userController.usercp = function(req, res) {
-  res.render('usercp', { user : req.user });
+  res.render('usercp');
 };
 
 // Go to add listing
 userController.addlisting = function(req, res) {
-  res.render('addlisting', { user : req.user });
+  res.render('addlisting');
 };
 
 // Post new Listing
