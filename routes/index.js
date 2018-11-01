@@ -30,7 +30,13 @@ router.get('/logout', auth.logout);
 // route for user control panel
 router.get('/usercp', isLoggedIn, auth.usercp);
 
-// route for add listing
+// GET route for add listing
 router.get('/addlisting', isLoggedIn, auth.addlisting);
+
+// POST route for add listing
+router.post('/addlisting', isLoggedIn, auth.postlisting);
+
+// DELETE route for listing
+router.delete('/addlisting/:id', isLoggedIn, auth.deleteListing);
 
 module.exports = router;

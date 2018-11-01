@@ -4,5 +4,14 @@ block content
   div.hero
     h1 University Exchange
     p A place where UF Students can buy and sell items.
+  .container.listings
+    - each listing in listings
+      .thumbnail
+        a(href="#")
+          h2= listing.shortdesc
+        h3= "$" + listing.price
+        form(action="/addlisting/"+listing.id +"?_method=DELETE" method="POST")
+          button(class="delete button" type="submit") Delete
+
   button.btn.btn-primary.btn(type='prev') <
   button.btn.btn-primary.btn(type='next') >

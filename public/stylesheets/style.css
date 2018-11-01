@@ -36,3 +36,9 @@ body {
   border-top-left-radius: 0;
   border-top-right-radius: 0;
 }
+
+.thumbnail {
+  display: inline-block;
+  width: 20%;
+  min-height: 140px;
+}
