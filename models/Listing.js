@@ -1,15 +1,12 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
-// var passportLocalMongoose = require('passport-local-mongoose');
 
 var ListingSchema = new mongoose.Schema({
-    shortdesc: String,
-    longdesc: String,
-    tags:     String,
-    price: Number,
-    address: String
+    shortdesc:  {type: String, required: true},
+    longdesc:   {type: String, required: true},
+    tags:       {type: [String], required: true},
+    price:      {type: Number, required: true},
+    address:    {type: String, required: true}
 });
-
-//ListingSchema.plugin(passportLocalMongoose);
 
 module.exports = mongoose.model('Listing', ListingSchema);
