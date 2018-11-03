@@ -15,18 +15,17 @@ html
         ul.nav.navbar-nav.mr-auto
           if (!user)
             li.nav-item
-              a.nav-link(href='/login') Login
+              a.nav-link(href='/users/login') Login
             li.nav-item
-              a.nav-link(href='/register') Register
+              a.nav-link(href='/users/register') Register
           if (user)
             li.nav-item
-              a.nav-link(href='/addlisting') Add New Listing
+              a.nav-link(href='/listings/new') Add New Listing
             li.nav-item
-              a.nav-link(href='/usercp') User Control Panel
+              a.nav-link(href='/users/settings') User Control Panel
             li.nav-item
-              a.nav-link(href='/logout') Logout
-            li.nav-item
-              a.nav-link Welcome #{user.name}
+              a.nav-link(href='/users/logout') Logout
+            span.navbar-text Welcome #{user.name}
         form.form-inline.my-2.my-lg-0
           input.form-control.mr-sm-2(type="search", placeholder="Search", aria-label="Search")
           button.btn.btn-outline-success.my-2.my-sm-0(type="submit") Search

@@ -3,7 +3,7 @@ extends layout
 block content
   .container
     h2.form-signin-heading Add New Listing
-    form.form-new-listing(role='form', action="/addlisting", method="post", style='max-width: 300px;')
+    form.form-new-listing(role='form', action="/listings/new", method="post", style='max-width: 300px;')
       input.form-control(type='text', name="listing[shortdesc]", placeholder='short description')
       br
       textarea.form-control(type='textarea', rows="5", name="listing[longdesc]", placeholder='long description')

@@ -53,7 +53,7 @@ userController.postlisting = function(req, res) {
   Listing.create(newListing, function(err, listing) {
     if(err){
       console.log(err);
-      res.redirect('/addlisting');
+      res.redirect('/listings/new');
     } else {
       res.redirect('/');
     }

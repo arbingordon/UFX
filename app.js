@@ -17,6 +17,7 @@ mongoose.connect('mongodb://logins1:logins1@ds147073.mlab.com:47073/ufx_login')
 
 var index = require('./routes/index');
 var users = require('./routes/users');
+var listings = require('./routes/listings');
 
 var app = express();
 
@@ -47,6 +48,7 @@ app.use(function(req, res, next) {
 
 app.use('/', index);
 app.use('/users', users);
+app.use('/listings', listings);
 
 // passport configuration
 var User = require('./models/User');
