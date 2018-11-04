@@ -1,8 +1,6 @@
-# node-express-passport-mongoose-auth
-This source code is part of [Node.js, Express.js, Mongoose.js and Passport.js Authentication tutorial](https://www.djamware.com/post/58bd823080aca7585c808ebf/nodejs-expressjs-mongoosejs-and-passportjs-authentication)
+# UFX (University of Florida Exchange)
+The purpose of the UFX app is to provide students with a web application that better facilitates transactions traditionally made through the UF Free and For Sale Facebook page.
 
-* Clone this repo
+## Run
 * Run 'npm install'
-* Run 'npm start' or 'nodemon'
-
-If you think this source code is useful, it will be great if you just give it star or just buy me a cup of cofee [![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=Q5WK24UVWUGBN)
+* Run 'npm start'
