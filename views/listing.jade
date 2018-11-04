@@ -2,9 +2,19 @@ extends layout
 
 block content
   .container
-    h1= listing.shortdesc
-    img(src=listing.file)
-    p= listing.longdesc
-    span.listing-price= "$" + listing.price
-    form(action="/listings/delete/"+listing.id +"?_method=DELETE" method="POST")
-                button.btn.btn-primary(type="submit") Delete
+    .row
+        .col-5
+            img.img-thumbnail(src=listing.file)
+        .col
+            img.rounded-circle.mr-2(src="http://placekitten.com/50/50")
+            span.h6 Firstname Lastname
+            hr
+            h1= listing.shortdesc
+            span.listing-price.h2.text-secondary= "$" + listing.price
+            p= listing.longdesc
+            .row
+                a.btn.btn-primary.mx-3(href="#") Message Seller
+                if (user)
+                    a.btn.btn-outline-primary.mr-3(href="#") Edit
+                    form(action="/listings/delete/"+listing.id +"?_method=DELETE" method="POST")
+                        button.btn.btn-outline-danger(type="submit") Delete

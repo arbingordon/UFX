@@ -2,23 +2,35 @@ extends layout
 
 block content
   .container
-    h2.form-signin-heading Add New Listing
-    form.form-new-listing(role='form', action="/listings/new", method="post", enctype="multipart/form-data", style='max-width: 300px;')
-      input.form-control(type='text', name="listing[shortdesc]", placeholder='short description')
-      br
-      textarea.form-control(type='textarea', rows="5", name="listing[longdesc]", placeholder='long description')
-      br
-      input.form-control(type='text', name="listing[address]", placeholder='address')
-      br
-      input.form-control(type='number', name="listing[price]", placeholder='$.$$')
-      br
-      input.form-control(type='text', name="listing[tags]", placeholder='tag1,tag2')
-      br
-      .custom-file.mb-3 
-        input.custom-file-input(type='file', name="file", id="inputGroupFile02")
-        label.custom-file-label(for="file") Choose File
-      br
-      button.btn.btn-lg.btn-primary.btn-block(type='submit') Post Listing
+    h2.form-signin-heading.pl-5 Add New Listing
+    form.form-new-listing.border.p-5.bg-white.mt-3(role='form', action="/listings/new", method="post", enctype="multipart/form-data")
+      .row.justify-content-center
+        .col
+          .form-group
+            label(for="shortdesc") Title 
+            input.form-control(type='text', name="listing[shortdesc]", id="shortdesc", placeholder='Title')
+          .form-group
+            label(for="longdesc") Description 
+            textarea.form-control(type='textarea', rows="5", name="listing[longdesc]", id="longdesc", placeholder='Description')
+          .form-group
+            label(for="price") Price 
+            input.form-control(type='number', name="listing[price]", id="price", placeholder='0.00')
+        .col
+          .form-group
+            label(for="address") Address 
+            input.form-control(type='text', name="listing[address]", id="address", placeholder='Address')
+          .form-group
+            label(for="tags") Tags 
+            input.form-control(type='text', name="listing[tags]", id="tags", placeholder='tag1,tag2')
+          .form-group
+            label(for="file") Image 
+            .custom-file.mb-3 
+              input.custom-file-input(type='file', name="file", id="inputGroupFile02")
+              label.custom-file-label(for="file") Choose Image
+      .row.justify-content-end
+        .col
+          .form-group
+            button.btn.btn-primary(type='submit') Post Listing
   script.
     $('#inputGroupFile02').on('change',function(){
         //get the file name
