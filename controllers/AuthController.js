@@ -3,6 +3,37 @@ var passport = require("passport");
 var User = require("../models/User");
 var Listing = require("../models/Listing");
 
+var GridFsStorage = require('multer-gridfs-storage'); //gridFS
+var crypto = require('crypto'); //generate filenames
+var multer = require('multer'); //for gridFS
+
+var mongoURI =  'mongodb://logins1:logins1@ds147073.mlab.com:47073/ufx_login';
+
+//from https://github.com/devconcept/multer-gridfs-storage
+// Create storage engine
+const storage = new GridFsStorage({
+  url: mongoURI,
+  file: (req, file) => {
+    return new Promise((resolve, reject) => {
+      crypto.randomBytes(16, (err, buf) => {
+        if (err) {
+          return reject(err);
+        }
+        const filename = buf.toString('hex') + path.extname(file.originalname);
+        const fileInfo = {
+          filename: filename,
+          bucketName: 'uploads'
+        };
+        resolve(fileInfo);
+      });
+    });
+  }
+});
+
+//upload is a middleware and uploads data to db
+const upload = multer({ storage }); //passing a storage engine
+
+
 var userController = {};
 
 // Restrict access to root page
@@ -48,6 +79,9 @@ userController.addlisting = function(req, res) {
 
 // Post new Listing
 userController.postlisting = function(req, res) {
+  //var file = upload.single(req.body.file);
+  //console.log(file);
+
   var newListing = req.body.listing;
   newListing.tags = newListing.tags.split(',');
   console.log(req.body);

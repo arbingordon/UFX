@@ -3,7 +3,7 @@ extends layout
 block content
   .container
     h2.form-signin-heading Add New Listing
-    form.form-new-listing(role='form', action="/listings/new", method="post", style='max-width: 300px;')
+    form.form-new-listing(role='form', action="/listings/new", method="post", enctype="multipart/form-data", style='max-width: 300px;')
       input.form-control(type='text', name="listing[shortdesc]", placeholder='short description')
       br
       textarea.form-control(type='textarea', rows="5", name="listing[longdesc]", placeholder='long description')
@@ -14,6 +14,8 @@ block content
       br
       input.form-control(type='text', name="listing[tags]", placeholder='tag1,tag2')
       br
-      //- input.form-control-file(type='file', name="newfile")
-      //- br
+      .custom-file.mb-3
+        input.custom-file-input(type='file', name="file", id="file")
+        label.custom-file-label(for="file") Choose File
+      br
       button.btn.btn-lg.btn-primary.btn-block(type='submit') Post Listing

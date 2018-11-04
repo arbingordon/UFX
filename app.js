@@ -8,12 +8,23 @@ var mongoose = require('mongoose');
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 var methodOverride = require("method-override");
+var crypto = require('crypto'); //generate filenames
+var multer = require('multer'); //for gridFS
+var GridFsStorage = require('multer-gridfs-storage'); //gridFS
+var Grid = require('gridfs-stream');
 
-
+let gfs;
+var mongoURI =  'mongodb://logins1:logins1@ds147073.mlab.com:47073/ufx_login';
 mongoose.Promise = global.Promise;
-mongoose.connect('mongodb://logins1:logins1@ds147073.mlab.com:47073/ufx_login')
-  .then(() =>  console.log('connection succesful'))
+mongoose.connect(mongoURI)
+  .then(function() {
+    gfs = Grid(mongoose.connection.db, mongoose.mongo);
+    gfs.collection('uploads');
+    console.log('connection succesful')
+  })
   .catch((err) => console.error(err));
+
+  
 
 var index = require('./routes/index');
 var users = require('./routes/users');
@@ -40,6 +51,7 @@ app.use(require('express-session')({
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(express.static(path.join(__dirname, 'public')));
+
 
 app.use(function(req, res, next) {
   res.locals.user = req.user || null;
