@@ -8,7 +8,7 @@ block content
       .listings
         - each listing in listings
           div.card(style="width: 18rem;")
-            img(class="card-img-top", src="http://placekitten.com/280/150")
+            img(class="card-img-top", src=listing.file)
             div.card-body
               h5.card-title= listing.shortdesc
               p.card-text= listing.longdesc

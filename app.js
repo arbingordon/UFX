@@ -58,6 +58,32 @@ app.use(function(req, res, next) {
   next();
 })
 
+//https://github.com/aheckmann/gridfs-stream
+// @route GET /image/:filename
+// @desc Display Image
+app.get('/uploads/:filename', (req, res) => {
+  gfs.files.findOne({ filename: req.params.filename }, (err, file) => {
+    // Check if file
+    if (!file || file.length === 0) {
+      return res.status(404).json({
+        err: 'No file exists'
+      });
+    }
+
+    // Check if image
+    if (file.contentType === 'image/jpeg' || file.contentType === 'image/png') {
+      // Read output (image) to browser
+      //create read stream
+      const readstream = gfs.createReadStream(file.filename);
+      readstream.pipe(res);
+    } else {
+      res.status(404).json({
+        err: 'Not an image'
+      });
+    }
+  });
+});
+
 app.use('/', index);
 app.use('/users', users);
 app.use('/listings', listings);

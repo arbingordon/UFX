@@ -6,7 +6,8 @@ var ListingSchema = new mongoose.Schema({
     longdesc:   {type: String, required: true},
     tags:       {type: [String], required: true},
     price:      {type: Number, required: true},
-    address:    {type: String, required: true}
+    address:    {type: String, required: true},
+    file:       {type: String, required: true}
 });
 
 module.exports = mongoose.model('Listing', ListingSchema);
