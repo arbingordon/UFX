@@ -1,0 +1,10 @@
+extends layout
+
+block content
+  .container
+    h1= listing.shortdesc
+    img(src=listing.file)
+    p= listing.longdesc
+    span.listing-price= "$" + listing.price
+    form(action="/listings/delete/"+listing.id +"?_method=DELETE" method="POST")
+                button.btn.btn-primary(type="submit") Delete

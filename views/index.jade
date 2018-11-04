@@ -8,12 +8,13 @@ block content
       .listings
         - each listing in listings
           div.card(style="width: 18rem;")
-            img(class="card-img-top", src=listing.file)
+            a(href="/listings/"+listing.id)
+              img(class="card-img-top", src=listing.file)
             div.card-body
-              h5.card-title= listing.shortdesc
+              a(href="/listings/"+listing.id)
+                h5.card-title= listing.shortdesc
               p.card-text= listing.longdesc
-              form(action="/listings/delete/"+listing.id +"?_method=DELETE" method="POST")
-                button.btn.btn-primary(type="submit") Delete
+              span.listing-price= "$" + listing.price
 
     button.btn.btn-primary.btn(type='prev') <
     button.btn.btn-primary.btn(type='next') >

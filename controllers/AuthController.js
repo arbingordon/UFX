@@ -62,6 +62,15 @@ userController.postlisting = function(req, res) {
   });
 }
 
+// View listing
+userController.viewListing = function(req, res) {
+  Listing.findById(req.params.id, function(err, listing) {
+    if (err) { console.log(err); res.redirect("/"); }
+    else { res.render("listing", {listing: listing}) }
+  });
+}
+
+// Delete Listing
 userController.deleteListing = function(req, res) {
   Listing.findOneAndRemove({ _id: req.params.id }, function (err) {
     if (err) { console.log(err); res.redirect("/"); }

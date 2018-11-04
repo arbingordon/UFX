@@ -42,6 +42,7 @@ router.get('/new', isLoggedIn, auth.addlisting);
 router.post('/new', isLoggedIn, upload.single("file"), auth.postlisting);
 
 // TODO: READ (individual listing page)
+router.get('/:id', auth.viewListing);
 
 // TODO: UPDATE (edit listing)
 
