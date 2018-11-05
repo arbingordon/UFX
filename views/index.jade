@@ -2,19 +2,34 @@ extends layout
 
 block content
   .container
-    div.hero
-      h1 University Exchange
-      p A place where UF Students can buy and sell items.
-      .listings
-        - each listing in listings
-          div.card(style="width: 18rem;")
-            a(href="/listings/"+listing.id)
-              img(class="card-img-top", src=listing.file)
-            div.card-body
+    .row
+      .col
+        .jumbotron.bg-dark.text-light
+          h1.display-4 University of Florida Exchange
+          p.lead A place where UF Students can buy and sell items.
+          a.btn.btn-primary.btn-lg(href="#") Sell Your Stuff
+            i.material-icons.ml-2.align-text-bottom chevron_right
+    .row
+        .input-group.mb-4.mx-3
+          input.form-control.rounded(type="search" placeholder="Search All Listings" aria-label="Search")
+          span.input-group-btn.ml-2
+            button.btn.btn-primary(type="submit") Search
+    .row
+      .col
+        h4 Recent Listings
+    .row
+      .col
+        .listings
+          - each listing in listings
+            div.card.listing-thumb(style="width: 18rem;")
               a(href="/listings/"+listing.id)
-                h5.card-title= listing.shortdesc
-              p.card-text= listing.longdesc
-              span.listing-price= "$" + listing.price
+                img(class="card-img-top", src=listing.file)
+              div.card-body
+                a(href="/listings/"+listing.id)
+                  h5.card-title.text-capitalize= listing.shortdesc
+                h6.card-subtitle.h4.mb-2= "$" + listing.price
+                p.card-text
+                  small.text-muted.text-truncate= listing.address
 
-    button.btn.btn-primary.btn(type='prev') <
+    button.btn.btn-primary.btn.mr-2(type='prev') <
     button.btn.btn-primary.btn(type='next') >

@@ -2,9 +2,15 @@ extends layout
 
 block content
   .container
-    form.form-signin(role='form', action="/users/register",method="post", style='max-width: 300px;')
-      h2.form-signin-heading Sign Up here
-      input.form-control(type='text', name="name", placeholder='Your Name')
-      input.form-control(type='text', name="username", placeholder='Your Username')
-      input.form-control(type='password', name="password", placeholder='Your Password')
+    form.form-signin.shadow-sm.rounded.p-5.bg-white.mt-3(role='form', action="/users/register",method="post")
+      h2.form-signin-heading.mb-4 Sign Up here
+      .form-group
+        label(for='inputName') Name
+        input.form-control(type='text', name="name", id="inputName", placeholder='Your Name')
+      .form-group
+        label(for='inputUsername') Username
+        input.form-control(type='text', name="username", id="inputUsername", placeholder='Your Username')
+      .form-group
+        label(for='inputPassword') Password
+        input.form-control(type='password', name="password", id="inputPassword", placeholder='Your Password')
       button.btn.btn-lg.btn-primary.btn-block(type='submit') Sign Up

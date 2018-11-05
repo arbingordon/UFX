@@ -48,8 +48,13 @@ body {
   align-content: stretch;
   padding-bottom: 20px;
 }
-.card {
+.listing-thumb {
   display: block;
   float: left;
   flex: 0 0 auto;
+}
+
+.listing-thumb img {
+  object-fit: cover;
+  height: 250px;
 }

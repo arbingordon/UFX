@@ -2,8 +2,8 @@ extends layout
 
 block content
   .container
-    h2.form-signin-heading.pl-5 Edit Listing
-    form.form-new-listing.border.p-5.bg-white.mt-3(role='form', action="/listings/edit/"+listing.id+"?_method=PUT", method="post", enctype="multipart/form-data")
+    form.form-new-listing.border.shadow-sm.rounded.p-5.bg-white.mt-3(role='form', action="/listings/edit/"+listing.id+"?_method=PUT", method="post", enctype="multipart/form-data")
+      h2.form-signin-heading Edit Listing
       .row.justify-content-center
         .col
           .form-group
@@ -26,7 +26,7 @@ block content
             label(for="file") Image 
             .custom-file.mb-3 
               input.custom-file-input(type='file', name="file", id="file")
-              label.custom-file-label(for="file") Choose Image
+              label.custom-file-label(for="file") Change Image
       .row.justify-content-end
         .col
           .form-group
