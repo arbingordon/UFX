@@ -11,7 +11,15 @@ block content
             hr
             h1= listing.shortdesc
             span.listing-price.h2.text-secondary= "$" + listing.price
-            p= listing.longdesc
+            p.mt-3= listing.longdesc
+            .row
+                i.ml-3.material-icons location_on
+                p= listing.address
+            .row
+                .col
+                    - each tag in listing.tags
+                        span.rounded.bg-white.text-muted.text-monospace.mx-1.px-2.py-1= tag
+            hr
             .row
                 a.btn.btn-primary.mx-3(href="#") Message Seller
                 if (user)
