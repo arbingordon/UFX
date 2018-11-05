@@ -2,26 +2,26 @@ extends layout
 
 block content
   .container
-    h2.form-signin-heading.pl-5 Add New Listing
-    form.form-new-listing.border.p-5.bg-white.mt-3(role='form', action="/listings/new", method="post", enctype="multipart/form-data")
+    h2.form-signin-heading.pl-5 Edit Listing
+    form.form-new-listing.border.p-5.bg-white.mt-3(role='form', action="/listings/edit/"+listing.id+"?_method=PUT", method="post", enctype="multipart/form-data")
       .row.justify-content-center
         .col
           .form-group
             label(for="shortdesc") Title 
-            input.form-control(type='text', name="listing[shortdesc]", id="shortdesc", placeholder='Title')
+            input.form-control(type='text', name="newListing[shortdesc]", id="shortdesc", placeholder='Title', value=listing.shortdesc)
           .form-group
             label(for="longdesc") Description 
-            textarea.form-control(type='textarea', rows="5", name="listing[longdesc]", id="longdesc", placeholder='Description')
+            textarea.form-control(type='textarea', rows="5", name="newListing[longdesc]", id="longdesc", placeholder='Description')= listing.longdesc
           .form-group
             label(for="price") Price 
-            input.form-control(type='number', name="listing[price]", id="price", placeholder='0.00')
+            input.form-control(type='number', name="newListing[price]", id="price", placeholder='0.00', value=listing.price)
         .col
           .form-group
             label(for="address") Address 
-            input.form-control(type='text', name="listing[address]", id="address", placeholder='Address')
+            input.form-control(type='text', name="newListing[address]", id="address", placeholder='Address', value=listing.address)
           .form-group
             label(for="tags") Tags 
-            input.form-control(type='text', name="listing[tags]", id="tags", placeholder='tag1,tag2')
+            input.form-control(type='text', name="newListing[tags]", id="tags", placeholder='tag1,tag2', value=listing.tags)
           .form-group
             label(for="file") Image 
             .custom-file.mb-3 
@@ -30,7 +30,7 @@ block content
       .row.justify-content-end
         .col
           .form-group
-            button.btn.btn-primary(type='submit') Post Listing
+            button.btn.btn-primary(type='submit') Update Listing
   script.
     $('#file').on('change',function(){
         //get the file name

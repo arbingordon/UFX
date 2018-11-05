@@ -16,7 +16,7 @@ var Grid = require('gridfs-stream');
 let gfs;
 var mongoURI =  'mongodb://logins1:logins1@ds147073.mlab.com:47073/ufx_login';
 mongoose.Promise = global.Promise;
-mongoose.connect(mongoURI)
+mongoose.connect(mongoURI, { useNewUrlParser: true })
   .then(function() {
     gfs = Grid(mongoose.connection.db, mongoose.mongo);
     gfs.collection('uploads');

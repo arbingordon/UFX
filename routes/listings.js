@@ -41,10 +41,14 @@ router.get('/new', isLoggedIn, auth.addlisting);
 // CREATE route for add listing
 router.post('/new', isLoggedIn, upload.single("file"), auth.postlisting);
 
-// TODO: READ (individual listing page)
+// READ (individual listing page)
 router.get('/:id', auth.viewListing);
 
-// TODO: UPDATE (edit listing)
+// GET edit listing view
+router.get('/edit/:id', isLoggedIn, auth.editListingView);
+
+// UPDATE (edit listing)
+router.put('/edit/:id', isLoggedIn, upload.single("file"), auth.editListing);
 
 // DELETE route for listing
 router.delete('/delete/:id', isLoggedIn, auth.deleteListing);

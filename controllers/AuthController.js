@@ -51,7 +51,6 @@ userController.postlisting = function(req, res) {
   var newListing = req.body.listing;
   newListing.file = "/uploads/" + req.file.filename;
   newListing.tags = newListing.tags.split(',');
-  console.log(newListing);
   Listing.create(newListing, function(err, listing) {
     if(err){
       console.log(err);
@@ -67,6 +66,27 @@ userController.viewListing = function(req, res) {
   Listing.findById(req.params.id, function(err, listing) {
     if (err) { console.log(err); res.redirect("/"); }
     else { res.render("listing", {listing: listing}) }
+  });
+}
+
+// View Edit listing
+userController.editListingView = function(req, res) {
+  Listing.findById(req.params.id, function(err, listing) {
+    if (err) { console.log(err); res.redirect("/"); }
+    else { res.render("editlisting", {listing: listing}) }
+  });
+}
+
+// Update listing
+userController.editListing = function(req, res) {
+  var updatedListing = req.body.newListing;
+  updatedListing.tags = updatedListing.tags.split(',');
+  if (req.file){
+    updatedListing.file = "/uploads/" + req.file.filename;
+  }
+  Listing.findByIdAndUpdate(req.params.id, updatedListing, function(err, listing) {
+    if (err) { console.log(err); res.redirect("/"); }
+    else { res.redirect("/listings/"+req.params.id) }
   });
 }
 

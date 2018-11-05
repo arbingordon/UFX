@@ -23,6 +23,6 @@ block content
             .row
                 a.btn.btn-primary.mx-3(href="#") Message Seller
                 if (user)
-                    a.btn.btn-outline-primary.mr-3(href="#") Edit
+                    a.btn.btn-outline-primary.mr-3(href="/listings/edit/" + listing.id) Edit
                     form(action="/listings/delete/"+listing.id +"?_method=DELETE" method="POST")
                         button.btn.btn-outline-danger(type="submit") Delete
