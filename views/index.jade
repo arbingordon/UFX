@@ -19,14 +19,14 @@ block content
         h4 Recent Listings
     .row
       .col
-        .listings
+        .listings-grid
           - each listing in listings
-            div.card.listing-thumb(style="width: 18rem;")
+            div.card.listing-thumb
               a(href="/listings/"+listing.id)
                 img(class="card-img-top", src=listing.file)
               div.card-body
                 a(href="/listings/"+listing.id)
-                  h5.card-title.text-capitalize= listing.shortdesc
+                  h5.card-title.text-capitalize.text-truncate= listing.shortdesc
                 h6.card-subtitle.h4.mb-2= "$" + listing.price
                 p.card-text
                   small.text-muted.text-truncate= listing.address

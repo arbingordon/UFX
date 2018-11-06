@@ -40,18 +40,14 @@ body {
 .container {
   margin: 20px auto;
 }
-.container .listings {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: flex-start;
-  align-content: stretch;
+.listings-grid {
+  display: grid;
+  grid-gap: 10px;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr) );
   padding-bottom: 20px;
 }
 .listing-thumb {
   display: block;
-  float: left;
-  flex: 0 0 auto;
 }
 
 .listing-thumb img {

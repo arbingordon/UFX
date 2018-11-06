@@ -8,9 +8,9 @@ block content
       h2 Current User Listings
           .row
       .col
-        .listings
+        .listings-grid
           - each listing in listings
-            div.card.listing-thumb(style="width: 18rem;")
+            div.card.listing-thumb
               a(href="/listings/"+listing.id)
                 img(class="card-img-top", src=listing.file)
               div.card-body
