@@ -38,7 +38,7 @@ userController.login = function(req, res) {
 
 // Go to user control panel
 userController.usercp = function(req, res) {
-  Listing.find({uid: req.user.id}, function (err, listings) {
+  Listing.find({user: req.user.id}, function (err, listings) {
     if (err) console.log(err);
     else res.render('usercp', { listings: listings });
   });
@@ -54,7 +54,7 @@ userController.postlisting = function(req, res) {
   var newListing = req.body.listing;
   newListing.file = "/uploads/" + req.file.filename;
   newListing.tags = newListing.tags.split(',');
-  newListing.uid = req.user.id;
+  newListing.user = req.user.id;
   Listing.create(newListing, function(err, listing) {
     if(err){
       console.log(err);
@@ -67,7 +67,8 @@ userController.postlisting = function(req, res) {
 
 // View listing
 userController.viewListing = function(req, res) {
-  Listing.findById(req.params.id, function(err, listing) {
+  Listing.findById(req.params.id).populate('user').exec(function(err, listing) {
+    console.log(listing);
     if (err) { console.log(err); res.redirect("/"); }
     else { res.render("listing", {listing: listing}) }
   });

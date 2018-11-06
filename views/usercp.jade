@@ -3,25 +3,45 @@ extends layout
 block content
   if (user)
     .container
-      input.form-control(type='text', name="address", placeholder='address')
-      button.btn.btn-lg.btn-primary.btn-block(type='changepassword') Change Password
-      h2 Current User Listings
-          .row
-      .col
-        .listings-grid
-          - each listing in listings
-            div.card.listing-thumb
-              a(href="/listings/"+listing.id)
-                img(class="card-img-top", src=listing.file)
-              div.card-body
+      .row
+        .col
+          .p-2.text-center
+              img.rounded-circle.m-2(src="http://placekitten.com/100/100")
+              h5.text-capitalize= user.name
+          hr.my-4
+          h2 Messages
+          .list-group
+            a.list-group-item.list-group-item-action.flex-column.align-items-start(href="#")
+              .d-flex.w-100.justify-content-between
+                h5.mb-1 John Doe
+                small 3 minutes ago
+              p.mb-1 Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit
+              small Donec id elit non mi porta.
+            a.list-group-item.list-group-item-action.flex-column.align-items-start(href="#")
+              .d-flex.w-100.justify-content-between
+                h5.mb-1 Mary Sue
+                small 3 days ago
+              p.mb-1 Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit
+              small Donec id elit non mi porta.
+            a.list-group-item.list-group-item-action.flex-column.align-items-start(href="#")
+              .d-flex.w-100.justify-content-between
+                h5.mb-1 Lisa
+                small 3 days ago
+              p.mb-1 Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit
+              small Donec id elit non mi porta.
+        .col
+          h2 Your Listings
+          .listings-grid
+            - each listing in listings
+              div.card.listing-thumb
                 a(href="/listings/"+listing.id)
-                  h5.card-title.text-capitalize= listing.shortdesc
-                h6.card-subtitle.h4.mb-2= "$" + listing.price
-                p.card-text
-                  small.text-muted.text-truncate= listing.address
-
-    button.btn.btn-primary.btn.mr-2(type='prev') <
-    button.btn.btn-primary.btn(type='next') >
+                  img(class="card-img-top", src=listing.file)
+                div.card-body
+                  a(href="/listings/"+listing.id)
+                    h5.card-title.text-capitalize.text-truncate= listing.shortdesc
+                  h6.card-subtitle.h4.mb-2= "$" + listing.price
+                  p.card-text.text-truncate
+                    small.text-muted= listing.address
 
   if (!user)
     h2 Not Authorized

@@ -9,7 +9,7 @@ var ListingSchema = new mongoose.Schema({
     price:      {type: Number, required: true},
     address:    {type: String, required: true},
     file:       {type: String, required: true},
-    uid:        [{type: Schema.Types.ObjectId, ref: 'User'}]
+    user:       {type: Schema.Types.ObjectId, ref: 'User'}
 });
 
 module.exports = mongoose.model('Listing', ListingSchema);

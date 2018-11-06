@@ -7,7 +7,7 @@ block content
             img.img-thumbnail(src=listing.file)
         .col
             img.rounded-circle.mr-2(src="http://placekitten.com/50/50")
-            span.h6 Firstname Lastname
+            span.h6= listing.user.name
             hr
             h1= listing.shortdesc
             span.listing-price.h2.text-secondary= "$" + listing.price
@@ -22,7 +22,7 @@ block content
             hr
             .row
                 a.btn.btn-primary.mx-3(href="#") Message Seller
-                if (user)
+                if (user && user.id == listing.user.id)
                     a.btn.btn-outline-primary.mr-3(href="/listings/edit/" + listing.id) Edit
                     form(action="/listings/delete/"+listing.id +"?_method=DELETE" method="POST")
                         button.btn.btn-outline-danger(type="submit") Delete
