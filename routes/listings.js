@@ -38,6 +38,9 @@ const upload = multer({ storage }); //passing a storage engine
 // GET route for add listing
 router.get('/new', isLoggedIn, auth.addlisting);
 
+// GET route for user control panel
+router.get('/usercp', isLoggedIn, auth.usercp);
+
 // CREATE route for add listing
 router.post('/new', isLoggedIn, upload.single("file"), auth.postlisting);
 
