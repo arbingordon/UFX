@@ -2,13 +2,14 @@ extends layout
 
 block content
   .container
-    .row
-      .col
-        .jumbotron.bg-dark.text-light
-          h1.display-4 University of Florida Exchange
-          p.lead A place where UF Students can buy and sell items.
-          a.btn.btn-primary.btn-lg(href="#") Sell Your Stuff
-            i.material-icons.ml-2.align-text-bottom chevron_right
+    if(!user)
+      .row
+        .col
+          .jumbotron.bg-dark.text-light
+            h1.display-4 University of Florida Exchange
+            p.lead A place where UF Students can buy and sell items.
+            a.btn.btn-primary.btn-lg(href="/users/login") Sell Your Stuff
+              i.material-icons.ml-2.align-text-bottom chevron_right
     .row
    .input-group.mb-4.mx-3
           input.form-control.rounded(type="search" placeholder="Search All Listings" aria-label="Search" id="txtSearch")
