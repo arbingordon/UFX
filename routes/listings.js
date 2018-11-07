@@ -42,6 +42,12 @@ router.get('/new', isLoggedIn, auth.addlisting);
 router.get('/usercp', isLoggedIn, auth.usercp);
 
 // CREATE route for add listing
+router.post('/search', auth.search);
+
+// CREATE route for add listing
+router.get('/search', auth.search);
+
+// CREATE route for add listing
 router.post('/new', isLoggedIn, upload.single("file"), auth.postlisting);
 
 // READ (individual listing page)

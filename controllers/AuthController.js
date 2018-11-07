@@ -44,6 +44,15 @@ userController.usercp = function(req, res) {
   });
 };
 
+
+// Search
+userController.search = function(req, res) {
+  Listing.find({tags: req.body.query}, function (err, listings) {
+    if (err) console.log(err);
+    else res.render('search', { oldquery: req.body.query, listings: listings });
+  });
+};
+
 // Go to add listing
 userController.addlisting = function(req, res) {
   res.render('addlisting');
@@ -55,7 +64,7 @@ userController.postlisting = function(req, res) {
   console.log(req.file);
   if(req.file)
     newListing.file = "/uploads/" + req.file.filename;
-  newListing.tags = newListing.tags.split(',');
+  newListing.tags = newListing.tags.split(',').trim();
   newListing.user = req.user.id;
   Listing.create(newListing, function(err, listing) {
     if(err){
