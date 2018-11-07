@@ -9,7 +9,7 @@ var crypto = require('crypto'); //generate filenames
 var multer = require('multer'); //for gridFS
 
 var mongoURI =  'mongodb://logins1:logins1@ds147073.mlab.com:47073/ufx_login';
-
+var listingsCtrl = require("../controllers/ListingsController.js");
 //from https://github.com/devconcept/multer-gridfs-storage
 // Create storage engine
 const storage = new GridFsStorage({
@@ -34,7 +34,8 @@ const storage = new GridFsStorage({
 //upload is a middleware and uploads data to db
 const upload = multer({ storage }); //passing a storage engine
 
-
+// Search (for the search results)
+router.get('/search/:criteria',isLoggedIn, listingsCtrl.search);
 // GET route for add listing
 router.get('/new', isLoggedIn, auth.addlisting);
 

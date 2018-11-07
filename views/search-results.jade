@@ -10,26 +10,26 @@ block content
           a.btn.btn-primary.btn-lg(href="#") Sell Your Stuff
             i.material-icons.ml-2.align-text-bottom chevron_right
     .row
-   .input-group.mb-4.mx-3
-          input.form-control.rounded(type="search" placeholder="Search All Listings" aria-label="Search" id="txtSearch")
+        .input-group.mb-4.mx-3
+          input.form-control.rounded(type="search" placeholder="Search All Listings" aria-label="Search" id="txtSearch" value='#{searchCriteria}')
           span.input-group-btn.ml-2
             button.btn.btn-primary(type="submit",id="btnSearch") Search
     .row
       .col
-        h4 Recent Listings
+        h4 Search results for: !{searchCriteria}
     .row
       .col
-        .listings-grid
+        .listings
           - each listing in listings
-            div.card.listing-thumb
+            div.card.listing-thumb(style="width: 18rem;")
               a(href="/listings/"+listing.id)
                 img(class="card-img-top", src=listing.file)
               div.card-body
                 a(href="/listings/"+listing.id)
-                  h5.card-title.text-capitalize.text-truncate= listing.shortdesc
+                  h5.card-title.text-capitalize= listing.shortdesc
                 h6.card-subtitle.h4.mb-2= "$" + listing.price
-                p.card-text.text-truncate
-                  small.text-muted= listing.address
+                p.card-text
+                  small.text-muted.text-truncate= listing.address
 
     button.btn.btn-primary.btn.mr-2(type='prev') <
     button.btn.btn-primary.btn(type='next') >
