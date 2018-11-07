@@ -52,7 +52,9 @@ userController.addlisting = function(req, res) {
 // Post new Listing
 userController.postlisting = function(req, res) {
   var newListing = req.body.listing;
-  newListing.file = "/uploads/" + req.file.filename;
+  console.log(req.file);
+  if(req.file)
+    newListing.file = "/uploads/" + req.file.filename;
   newListing.tags = newListing.tags.split(',');
   newListing.user = req.user.id;
   Listing.create(newListing, function(err, listing) {

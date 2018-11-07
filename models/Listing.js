@@ -8,7 +8,7 @@ var ListingSchema = new mongoose.Schema({
     tags:       {type: [String], required: true},
     price:      {type: Number, required: true},
     address:    {type: String, required: true},
-    file:       {type: String, required: true},
+    file:       {type: String},
     user:       {type: Schema.Types.ObjectId, ref: 'User'}
 });
 
