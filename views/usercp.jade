@@ -42,6 +42,7 @@ block content
                   h6.card-subtitle.h4.mb-2= "$" + listing.price
                   p.card-text.text-truncate
                     small.text-muted= listing.address
-
+                  form(action="/listings/delete/"+listing.id +"?_method=DELETE" method="POST")
+                      button.btn.btn-outline-danger(type="submit") Delete
   if (!user)
     h2 Not Authorized
