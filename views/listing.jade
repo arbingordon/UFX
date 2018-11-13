@@ -36,7 +36,7 @@ block content
                 }
             script(src='https://cdn.rawgit.com/openlayers/openlayers.github.io/master/en/v5.3.0/build/ol.js')
 
-            #map(tabindex='0')
+            #map.mt-4(tabindex='0')
             script(src='https://unpkg.com/openlayers@4.4.2')
             script(src='https://unpkg.com/ol-popup@2.0.0')
             script(type='text/javascript').
@@ -46,17 +46,29 @@ block content
                     var address = $("#address").text();
                     var lat = 0;
                     var lon = 0;
-                    fetch("https://nominatim.openstreetmap.org/search?format=json&q="+address).then(function(response) {
+                    var geojson = {};
+                    fetch("https://nominatim.openstreetmap.org/search?format=json&polygon_geojson=1&q="+address).then(function(response) {
                         return response.json();
                     }).then(function(json) {
                         console.log(json[0].lat);
-                        lat = json[0].lat;
-                        lon = json[0].lon;
+                        lat = parseFloat(json[0].lat);
+                        lon = parseFloat(json[0].lon);
+                        geojson = json[0].geojson;
                     }).then(function() {
-                        console.log(lat + ", " + lon);
+                        console.log(geojson["coordinates"]);
+                        var polygon = new ol.geom.Polygon([geojson["coordinates"]]);
+                        
+                        var feature = new ol.Feature(polygon);
+                        // Create vector source and the feature to it.
+                        var vectorSource = new ol.source.Vector();
+                        vectorSource.addFeature(feature);
+                        // Create vector layer attached to the vector source.
+                        var vectorLayer = new ol.layer.Vector({
+                            source: vectorSource
+                        });
                         var olview = new ol.View({
-                            center: [lat, lon],
-                            zoom: 5,
+                            center: ol.proj.fromLonLat([lon, lat]),
+                            zoom: 17,
                             minZoom: 2,
                             maxZoom: 20
                         });
@@ -66,8 +78,9 @@ block content
                         var map = new ol.Map({
                             target: doc.getElementById('map'),
                             view: olview,
-                            layers: [baseLayer]
+                            layers: [baseLayer, vectorLayer]
                         });
-                        map.getView().setCenter([0, 0]);
+                        //map.getView().setCenter([40, -73]);
+                        console.log(map.getView().getCenter());
                     })
                 })(window, document);
