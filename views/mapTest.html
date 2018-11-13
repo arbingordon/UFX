@@ -49,7 +49,7 @@ body {
     <script src="http://openlayers.org/en/v3.11.2/build/ol.js"></script>
     <script type="text/javascript">
 
-      var olview = new ol.View({ center: [0, 0], zoom: 2 }),
+      var olview = new ol.View({ center: ol.proj.fromLonLat([-82.3248262, 29.6516344]), zoom: 14 }),
     baseLayer = new ol.layer.Tile({ source: new ol.source.OSM() }),
     map = new ol.Map({
       target: document.getElementById('map'),
