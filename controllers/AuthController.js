@@ -64,7 +64,7 @@ userController.postlisting = function(req, res) {
   console.log(req.file);
   if(req.file)
     newListing.file = "/uploads/" + req.file.filename;
-  newListing.tags = newListing.tags.split(',').trim();
+  newListing.tags = newListing.tags.split(',');
   newListing.user = req.user.id;
   Listing.create(newListing, function(err, listing) {
     if(err){
