@@ -8,7 +8,7 @@ var listingsController = {};
 // View Edit listing
 listingsController.search = function(req, res) {
   var criteria = req.params.criteria
-    Listing.find({$or:[{"shortdesc": {$regex: new RegExp(criteria.replace(/\s+/g,"\\s+"), "gi")}},{"longdesc": {$regex: new RegExp(criteria.replace(/\s+/g,"\\s+"), "gi")}}]}, function (err, listings) {
+    Listing.find({$or:[{"shortdesc": {$regex: new RegExp(criteria.replace(/\s+/g,"\\s+"), "gi")}}, {"tags": {$regex: new RegExp(criteria.replace(/\s+/g,"\\s+"), "gi")}}, {"longdesc": {$regex: new RegExp(criteria.replace(/\s+/g,"\\s+"), "gi")}}]}, function (err, listings) {
         if (err) console.log(err);
         else res.render("search-results", { listings: listings,searchCriteria: criteria });
       });
