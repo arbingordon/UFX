@@ -14,7 +14,7 @@ block content
             p.mt-3= listing.longdesc
             .row
                 i.ml-3.material-icons location_on
-                p= listing.address
+                p#address= listing.address
             .row
                 .col
                     - each tag in listing.tags
@@ -26,89 +26,78 @@ block content
                     a.btn.btn-outline-primary.mr-3(href="/listings/edit/" + listing.id) Edit
                     form(action="/listings/delete/"+listing.id +"?_method=DELETE" method="POST")
                         button.btn.btn-outline-danger(type="submit") Delete
+    .row
+        .col
+            link(rel='stylesheet', href='https://cdn.rawgit.com/openlayers/openlayers.github.io/master/en/v5.3.0/css/ol.css', type='text/css')
+            link(rel="stylesheet" href="https://unpkg.com/leaflet@1.3.4/dist/leaflet.css",integrity="sha512-puBpdR0798OZvTTbP4A8Ix/l+A4dHDD0DGqYW6RQ+9jxkRFclaxxQb/SJAWZfWAkuyeQUytO7+7N4QKrDh+drA==",crossorigin="")
+            script(src='https://cdn.rawgit.com/openlayers/openlayers.github.io/master/en/v5.3.0/build/ol.js')
+            script(src="https://unpkg.com/leaflet@1.3.4/dist/leaflet.js",integrity="sha512-nMMmRyTVoLYqjP9hrbed9S+FzjZHW5gY1TWCHA5ckwXZBadntCNs8kEqAWdrb9O7rxbCaA4lKTIWjDXZxflOcA==",crossorigin="")
+            style.
+                #map {
+                    height: 300px;
+                    width: 100%;
+                }
+            #map.mt-4(tabindex='0')
+            script(src='https://unpkg.com/openlayers@4.4.2')
+            script(src='https://unpkg.com/ol-popup@2.0.0')
+            script(type='text/javascript').
+                (function (win, doc) {
+                    
+                    //Geocoding
+                    var address = $("#address").text() + " gainesville";
+                    var lat = 0;
+                    var lon = 0;
+                    fetch("https://nominatim.openstreetmap.org/search?format=json&polygon_geojson=1&q="+address).then(function(response) {
+                        return response.json();
+                    }).then(function(json) {
+                        lat = parseFloat(json[0].lat);
+                        lon = parseFloat(json[0].lon);
+                        geojson = json[0].geojson;
+                    }).then(function() {
+                        var circle = new ol.geom.Circle(ol.proj.transform([lon, lat], 'EPSG:4326', 'EPSG:3857'), 100 );
+                        var circleFeature = new ol.Feature(circle);
+                        var vectorSource = new ol.source.Vector({
+                            projection: 'EPSG:4326',
+                            features: [circleFeature]
+                        });
+                        var style = new ol.style.Style({
+                            fill: new ol.style.Fill({
+                                color: 'rgba(20, 100, 240, 0.3)'
+                            }),
+                            stroke: new ol.style.Stroke({
+                                width: 3,
+                                color: 'rgba(0, 100, 240, 0.8)'
+                            }),
+                            image: new ol.style.Circle({
+                                fill: new ol.style.Fill({
+                                    color: 'rgba(55, 200, 150, 0.5)'
+                                }),
+                                stroke: new ol.style.Stroke({
+                                    width: 10,
+                                    color: 'rgba(55, 200, 150, 0.8)'
+                                }),
+                                radius: 2
+                            }),
+                        });
 
+                        var vectorLayer = new ol.layer.Vector({
+                            source: vectorSource,
+                            style: style
+                        });
 
-           
-    link(rel='stylesheet', href='https://cdn.rawgit.com/openlayers/openlayers.github.io/master/en/v5.3.0/css/ol.css', type='text/css')
-    |     
-    link(rel='stylesheet', href='https://unpkg.com/ol-geocoder@3.2.0/dist/ol-geocoder.min.css', type='text/css')
-    |     
-    link(rel='stylesheet', href='https://unpkg.com/openlayers@4.6.5/dist/ol.css', type='text/css')
-    |     
-    link(rel='stylesheet', href='https://unpkg.com/ol-popup@2.0.0/src/ol-popup.css', type='text/css')
-    |     
-    style.
-      /*.map {
-      height: 400px;
-      width: 100%;*/
-      .html, #map {
-      width:50%;
-      height:50%;
-      overflow:hidden;
-      }
-      body {
-      font: 1em/1.5 BlinkMacSystemFont,-apple-system,"Segoe UI","Roboto","Oxygen","Ubuntu","Cantarell","Fira Sans","Droid Sans","Helvetica Neue","Helvetica","Arial",sans-serif;
-      color: #222;
-      font-weight: 400;
-      }
-      #map {
-      position:static;
-      z-index:5;
-      top:50; 
-      bottom:0;
-      }
-      .ol-control button {
-      background-color: rgba(40, 40, 40, 0.8) !important;
-      }
-      .ol-control button:hover {
-      background-color: rgba(40, 40, 40, 1) !important;
-      }
-      }
-    |     
-    script(src='https://cdn.rawgit.com/openlayers/openlayers.github.io/master/en/v5.3.0/build/ol.js')
-    |     
-    script(src='https://unpkg.com/openlayers@4.6.5/dist/ol.js')
-    |     
-    script(src='https://unpkg.com/ol-geocoder@3.2.0/dist/ol-geocoder.js')
-    |     
-    script(src='https://unpkg.com/ol-popup@2.0.0/src/ol-popup.js')
-    |     
-    title OpenLayers 
-  |   
-  body
-    h2 Item Location
-    |     
-    #map.map(tabindex='0')
-    |     
-    script(src='http://openlayers.org/en/v3.11.2/build/ol.js')
-    |     
-    script(type='text/javascript').
-      var olview = new ol.View({ center: ol.proj.fromLonLat([-82.3248262, 29.6516344]), zoom: 14 }),
-      baseLayer = new ol.layer.Tile({ source: new ol.source.OSM() }),
-      map = new ol.Map({
-      target: document.getElementById('map'),
-      view: olview,
-      layers: [baseLayer]
-      });
-      // popup
-      var popup = new ol.Overlay.Popup();
-      map.addOverlay(popup);
-      //Instantiate with some options and add the Control
-      var geocoder = new Geocoder('nominatim', {
-      provider: 'osm',
-      lang: 'en',
-      placeholder: 'Search for ...',
-      limit: 5,
-      debug: false,
-      autoComplete: true,
-      keepOpen: true
-      });
-      map.addControl(geocoder);
-      //Listen when an address is chosen
-      geocoder.on('addresschosen', function (evt) {
-      console.info(evt);
-      window.setTimeout(function () {
-      popup.show(evt.coordinate, evt.address.formatted);
-      }, 500);
-      });
-
+                        var olview = new ol.View({
+                            center: ol.proj.fromLonLat([lon, lat]),
+                            zoom: 17,
+                            minZoom: 2,
+                            maxZoom: 20
+                        });
+                        var baseLayer = new ol.layer.Tile({
+                            source: new ol.source.OSM()
+                        });
+                        var map = new ol.Map({
+                            target: doc.getElementById('map'),
+                            view: olview,
+                            layers: [baseLayer,vectorLayer]
+                        });
+                    });
+                    })(window, document);
