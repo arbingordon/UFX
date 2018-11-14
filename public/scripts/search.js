@@ -5,8 +5,9 @@ $('#btnSearch').on('click',function(){
         window.location.href = '/';
     }
     else{
-    window.location.href = '/listings/search/'+ criteria;
+        window.location.href = '/listings/search/'+ criteria;
     }
+    return false;
    //alert($('#txtSearch').val());
 });
 

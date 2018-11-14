@@ -35,7 +35,7 @@ const storage = new GridFsStorage({
 const upload = multer({ storage }); //passing a storage engine
 
 // Search (for the search results)
-router.get('/search/:criteria',isLoggedIn, listingsCtrl.search);
+router.get('/search/:criteria', listingsCtrl.search);
 // GET route for add listing
 router.get('/new', isLoggedIn, auth.addlisting);
 
