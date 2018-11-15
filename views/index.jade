@@ -21,7 +21,7 @@ block content
     .row
       .col
         .listings-grid
-          - each listing in listings
+          - each listing in listings.reverse()
             div.card.listing-thumb
               a(href="/listings/"+listing.id)
                 img(class="card-img-top", src=listing.file)
