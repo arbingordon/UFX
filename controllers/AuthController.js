@@ -20,7 +20,13 @@ userController.register = function(req, res) {
 
 // Post registration
 userController.doRegister = function(req, res) {
-  User.register(new User({ username : req.body.username, name: req.body.name }), req.body.password, function(err, user) {
+  var newUser = req.body.newUser;
+  if(req.file) {
+    newUser.image = "/uploads/" + req.file.filename;
+  } else {
+    newUser.image = "/uploads/cdbd82095c481b310c15ac4b1b130ce6.png";
+  }
+  User.register(new User(newUser), req.body.newUser.password, function(err, user) {
     if (err) {
       return res.render('register');
     }
@@ -40,7 +46,9 @@ userController.login = function(req, res) {
 userController.usercp = function(req, res) {
   Listing.find({user: req.user.id}, function (err, listings) {
     if (err) console.log(err);
-    else res.render('usercp', { listings: listings });
+    else {
+      res.render('usercp', { listings: listings });
+    }
   });
 };
 
@@ -61,7 +69,6 @@ userController.addlisting = function(req, res) {
 // Post new Listing
 userController.postlisting = function(req, res) {
   var newListing = req.body.listing;
-  console.log(req.file);
   if(req.file)
     newListing.file = "/uploads/" + req.file.filename;
   newListing.tags = newListing.tags.split(',');
@@ -79,7 +86,6 @@ userController.postlisting = function(req, res) {
 // View listing
 userController.viewListing = function(req, res) {
   Listing.findById(req.params.id).populate('user').exec(function(err, listing) {
-    console.log(listing);
     if (err) { console.log(err); res.redirect("/"); }
     else { res.render("listing", {listing: listing}) }
   });
@@ -128,5 +134,25 @@ userController.logout = function(req, res) {
   req.logout();
   res.redirect('/');
 };
+
+// View Edit user
+userController.editUserView = function(req, res) {
+  User.findById(req.params.id, function(err, user) {
+    if (err) { console.log(err); res.redirect("/"); }
+    else { res.render("edituser", {user: user}) }
+  });
+}
+
+// Update user
+userController.editUser = function(req, res) {
+  var updatedUser = req.body.newUser;
+  if (req.file){
+    updatedUser.image = "/uploads/" + req.file.filename;
+  }
+  User.update({_id: req.params.id}, updatedUser, function(err, user) {
+    if (err) { console.log(err); res.redirect("/"); }
+    else { res.redirect("/users/settings") }
+  });
+}
 
 module.exports = userController;

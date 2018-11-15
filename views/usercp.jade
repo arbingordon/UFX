@@ -5,9 +5,18 @@ block content
     .container
       .row
         .col
-          .p-2.text-center
-              img.rounded-circle.m-2(src="http://placekitten.com/100/100")
+          .p-4.text-center.bg-dark.text-light.rounded
+              img.profile-picture.rounded-circle.m-2(src=user.image)
               h5.text-capitalize= user.name
+              .user-rating
+                - for (var x = 0; x < 5; x++)
+                  i.material-icons.align-bottom.mr-2 star
+              a.btn.btn-outline-secondary.my-3(href="/users/edit/"+user.id) Edit Account
+              div
+                i.material-icons.mr-2.align-bottom.text-secondary local_offer
+                | #{listings.length} Listings
+
+
           hr.my-4
           h2 Messages
           .list-group

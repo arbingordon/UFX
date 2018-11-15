@@ -8,7 +8,7 @@ html
     link(href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet")
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
   body
-    nav.navbar.navbar-expand-lg.navbar-dark.bg-dark.mb-5
+    nav.navbar.navbar-expand-lg.navbar-dark.bg-dark.mb-5.py-1
       a.navbar-brand(href="/") University Exchange
       button.navbar-toggler(type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation")
         span.navbar-toggler-icon
@@ -29,7 +29,7 @@ html
             ul.nav.navbar-nav.ml-auto
               li.nav-item.dropdown
                 a.nav-link.dropdown-toggle(href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false") 
-                  i.material-icons.mr-2.align-bottom account_circle
+                  img.rounded-circle.mr-2.profile-picture.extra-small(src=user.image)
                   | #{user.name}
                 .dropdown-menu.dropdown-menu-right(aria-labelledby="navbarDropdown")
                   a.dropdown-item.px-3(href="/users/settings") 

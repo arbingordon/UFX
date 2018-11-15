@@ -54,3 +54,20 @@ body {
   object-fit: cover;
   height: 250px;
 }
+
+.profile-picture {
+  height:100px;
+}
+
+.profile-picture.small {
+  height:50px;
+}
+
+.profile-picture.extra-small {
+  height:30px;
+}
+
+.user-rating i {
+  font-size: 17px;
+  margin: 0 !important;
+}

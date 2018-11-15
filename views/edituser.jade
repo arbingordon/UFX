@@ -2,14 +2,14 @@ extends layout
 
 block content
   .container
-    form.form-signin.shadow-sm.rounded.p-5.bg-white.mt-3(role='form', action="/users/register", method="post", enctype="multipart/form-data")
+    form.form-signin.shadow-sm.rounded.p-5.bg-white.mt-3(role='form', action="/users/edit/"+user.id+"?_method=PUT", method="post", enctype="multipart/form-data")
       h2.form-signin-heading.mb-4 Sign Up here
       .form-group
         label(for='inputName') Name
-        input.form-control(type='text', name="newUser[name]", id="inputName", placeholder='Your Name')
+        input.form-control(type='text', name="newUser[name]", id="inputName", placeholder='Your Name', value=user.name)
       .form-group
         label(for='inputUsername') Username
-        input.form-control(type='text', name="newUser[username]", id="inputUsername", placeholder='Your Username')
+        input.form-control(type='text', name="newUser[username]", id="inputUsername", placeholder='Your Username', value=user.username)
       .form-group
         label(for='inputPassword') Password
         input.form-control(type='password', name="newUser[password]", id="inputPassword", placeholder='Your Password')

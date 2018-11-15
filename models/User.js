@@ -6,6 +6,7 @@ var UserSchema = new Schema({
     username: String,
     password: String,
     name: String,
+    image: {type: String},
     listings: [{ type: Schema.Types.ObjectId, ref: 'Listing' }]
 });
 
