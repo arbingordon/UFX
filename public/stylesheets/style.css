@@ -1,5 +1,9 @@
 body {
   background-color: #eee;
+  background-image: url("/gator_back.jpg");
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
 }
 
 .form-signin {
@@ -70,4 +74,25 @@ body {
 .user-rating i {
   font-size: 17px;
   margin: 0 !important;
+}
+
+nav.navbar.navbar-expand-lg.navbar-dark.bg-dark.mb-5.py-1 {
+    background-color: red;
+    -webkit-animation-name: example; /* Safari 4.0 - 8.0 */
+    -webkit-animation-duration: 5s; /* Safari 4.0 - 8.0 */
+    animation-name: example;
+    animation-duration: 5s;
+    animation-iteration-count: infinite
+}
+
+/* Safari 4.0 - 8.0 */
+@-webkit-keyframes example {
+    0%   {background-color: orange;}
+    100%  {background-color: blue;}
+}
+
+/* Standard syntax */
+@keyframes example {
+    0%   {background-color: orange;}
+    100%  {background-color: blue;}
 }
