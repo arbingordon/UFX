@@ -42,6 +42,9 @@ router.post('/register', upload.single("file"), auth.doRegister);
 // route to login page
 router.get('/login', auth.login);
 
+// route to login page
+router.get('/loginAfterRegister', auth.loginAfterRegister);
+
 // route for login action
 router.post('/login', auth.doLogin);
 

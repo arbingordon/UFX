@@ -30,36 +30,37 @@ userController.doRegister = function(req, res) {
   } else {
     newUser.image = "/uploads/cdbd82095c481b310c15ac4b1b130ce6.png";
   }
-  
-  console.log(newUser.email);
-
   request({
-      url: "http://scr.im/xml/email=" + newUser.email,
-      method: "POST",
-      body: ""
-      }, function (error, resp, body){
-        if (error) {console.log(error)}
-         console.log(body);
-         _json = JSON.parse(convertXML.xml2json(body, {compact: true}));
-         console.log(_json);
-         console.log(_json.scrim.url._text);
-         newUser.imageurl = _json.scrim.url._text;
-  });
-
-  User.register(new User(newUser), req.body.newUser.password, function(err, user) {
-    if (err) {
-      return res.render('register');
-    }
-
-    passport.authenticate('local')(req, res, function () {
-      res.redirect('/');
-    });
+    url: "http://scr.im/xml/email=" + newUser.email,
+    method: "POST",
+    body: ""
+    }, function (error, resp, body){
+      if (error) {console.log(error)}
+       _json = JSON.parse(convertXML.xml2json(body, {compact: true}));
+       newUser.emailurl = _json.scrim.url._text;
+       console.log(newUser);
+       User.register(new User(newUser), newUser.password, function(err, user) {
+        if (err) {
+          console.log(err);
+          return res.render('register');
+        } else {
+          res.redirect('loginAfterRegister');
+        }
+        // passport.authenticate('local')(req, res, function () {
+        //   res.redirect('/');
+        // });
+      });
   });
 };
 
 // Go to login page
 userController.login = function(req, res) {
   res.render('login');
+};
+
+// Go to loginAfterRegister page
+userController.loginAfterRegister = function(req, res) {
+  res.render('loginAfterRegister');
 };
 
 // Go to user control panel
@@ -184,6 +185,6 @@ userController.editUser = function(req, res) {
         else { res.redirect("/users/settings");}
       });
   });
-}
+};
 
 module.exports = userController;
