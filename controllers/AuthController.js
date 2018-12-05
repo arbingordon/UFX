@@ -2,6 +2,10 @@ var mongoose = require("mongoose");
 var passport = require("passport");
 var User = require("../models/User");
 var Listing = require("../models/Listing");
+var fetch = require("fetch");
+var convertXML = require('xml-js');
+let request = require('request');
+
 
 var userController = {};
 
@@ -26,6 +30,25 @@ userController.doRegister = function(req, res) {
   } else {
     newUser.image = "/uploads/cdbd82095c481b310c15ac4b1b130ce6.png";
   }
+  
+  console.log(newUser.email);
+
+  request({
+      url: "http://scr.im/xml/email=" + newUser.email,
+      method: "POST",
+      body: ""
+      }, function (error, resp, body){
+         console.log(body);
+         _json = JSON.parse(convertXML.xml2json(body, {compact: true}));
+         console.log(_json);
+         console.log(_json.scrim.url._text);
+  });
+  // newUser.
+  // blah 
+  // convertXML
+  // var result1 = 
+
+
   User.register(new User(newUser), req.body.newUser.password, function(err, user) {
     if (err) {
       return res.render('register');
