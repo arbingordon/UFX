@@ -1,0 +1,40 @@
+extends layout
+
+block content
+  .container
+    form.form-new-listing.border.shadow-sm.rounded.p-5.bg-white.mt-3(role='form', action="/listings/edit/"+listing.id+"?_method=PUT", method="post", enctype="multipart/form-data")
+      h2.form-signin-heading Edit Listing
+      .row.justify-content-center
+        .col
+          .form-group
+            label(for="shortdesc") Title 
+            input.form-control(type='text', name="newListing[shortdesc]", id="shortdesc", placeholder='Title', value=listing.shortdesc)
+          .form-group
+            label(for="longdesc") Description 
+            textarea.form-control(type='textarea', rows="5", name="newListing[longdesc]", id="longdesc", placeholder='Description')= listing.longdesc
+          .form-group
+            label(for="price") Price 
+            input.form-control(type='number', name="newListing[price]", id="price", placeholder='0.00', value=listing.price)
+        .col
+          .form-group
+            label(for="address") Address 
+            input.form-control(type='text', name="newListing[address]", id="address", placeholder='Address', value=listing.address)
+          .form-group
+            label(for="tags") Tags 
+            input.form-control(type='text', name="newListing[tags]", id="tags", placeholder='tag1,tag2', value=listing.tags)
+          .form-group
+            label(for="file") Image 
+            .custom-file.mb-3 
+              input.custom-file-input(type='file', name="file", id="file")
+              label.custom-file-label(for="file") Change Image
+      .row.justify-content-end
+        .col
+          .form-group
+            button.btn.btn-primary(type='submit') Update Listing
+  script.
+    $('#file').on('change',function(){
+        //get the file name
+        var fileName = $(this).val().replace("C:\\fakepath\\", "");
+        //replace the "Choose a file" label
+        $(this).next('.custom-file-label').html(fileName);
+    });
