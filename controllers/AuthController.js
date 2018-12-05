@@ -38,16 +38,13 @@ userController.doRegister = function(req, res) {
       method: "POST",
       body: ""
       }, function (error, resp, body){
+        if (error) {console.log(error)}
          console.log(body);
          _json = JSON.parse(convertXML.xml2json(body, {compact: true}));
          console.log(_json);
          console.log(_json.scrim.url._text);
+         newUser.imageurl = _json.scrim.url._text;
   });
-  // newUser.
-  // blah 
-  // convertXML
-  // var result1 = 
-
 
   User.register(new User(newUser), req.body.newUser.password, function(err, user) {
     if (err) {
@@ -172,9 +169,20 @@ userController.editUser = function(req, res) {
   if (req.file){
     updatedUser.image = "/uploads/" + req.file.filename;
   }
-  User.update({_id: req.params.id}, updatedUser, function(err, user) {
-    if (err) { console.log(err); res.redirect("/"); }
-    else { res.redirect("/users/settings") }
+  request({
+    url: "http://scr.im/xml/email=" + updatedUser.email,
+    method: "POST",
+    body: ""
+    }, function (error, resp, body){
+      if (error) {console.log(error)}
+       _json = JSON.parse(convertXML.xml2json(body, {compact: true}));
+       console.log(_json.scrim.url._text);
+       updatedUser.emailurl = _json.scrim.url._text;
+       console.log(updatedUser.emailurl);
+       User.updateOne({_id: req.params.id}, updatedUser, function(err, user) {
+        if (err) { console.log(err); res.redirect("/"); }
+        else { res.redirect("/users/settings");}
+      });
   });
 }
 
