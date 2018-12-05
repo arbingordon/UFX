@@ -21,11 +21,13 @@ block content
                         span.rounded.bg-white.text-muted.text-monospace.mx-1.px-2.py-1= tag
             hr
             .row
-                a.btn.btn-primary.mx-3(href=listing.user.emailurl) Message Seller
-                if (user && user.id == listing.user.id)
-                    a.btn.btn-outline-primary.mr-3(href="/listings/edit/" + listing.id) Edit
-                    form(action="/listings/delete/"+listing.id +"?_method=DELETE" method="POST")
-                        button.btn.btn-outline-danger(type="submit") Delete
+                .col
+                    if (user.id != listing.user.id)
+                        a.btn.btn-primary(href=listing.user.emailurl) Message Seller
+                    if (user && user.id == listing.user.id)
+                        a.btn.btn-outline-primary.mr-3(href="/listings/edit/" + listing.id) Edit
+                        form.d-inline-block(action="/listings/delete/"+listing.id +"?_method=DELETE" method="POST")
+                            button.btn.btn-outline-danger(type="submit") Delete
     .row
         .col
             link(rel='stylesheet', href='https://cdn.rawgit.com/openlayers/openlayers.github.io/master/en/v5.3.0/css/ol.css', type='text/css')
