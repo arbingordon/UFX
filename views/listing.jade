@@ -22,12 +22,13 @@ block content
             hr
             .row
                 .col
-                    if (user.id != listing.user.id)
-                        a.btn.btn-primary(href=listing.user.emailurl) Message Seller
                     if (user && user.id == listing.user.id)
                         a.btn.btn-outline-primary.mr-3(href="/listings/edit/" + listing.id) Edit
                         form.d-inline-block(action="/listings/delete/"+listing.id +"?_method=DELETE" method="POST")
                             button.btn.btn-outline-danger(type="submit") Delete
+                    else
+                        a.btn.btn-primary(href=listing.user.emailurl) Message Seller
+
     .row
         .col
             link(rel='stylesheet', href='https://cdn.rawgit.com/openlayers/openlayers.github.io/master/en/v5.3.0/css/ol.css', type='text/css')
