@@ -1,9 +1,7 @@
 body {
   background-color: #eee;
-  background-image: url("/gator_back.jpg");
-  background-repeat: no-repeat;
+  background-image: url("/background.png");
   background-attachment: fixed;
-  background-size: cover;
 }
 
 .form-signin {
@@ -61,14 +59,17 @@ body {
 
 .profile-picture {
   height:100px;
+  width: 100px;
 }
 
 .profile-picture.small {
   height:50px;
+  width: 50px;
 }
 
 .profile-picture.extra-small {
   height:30px;
+  width: 30px;
 }
 
 .user-rating i {
@@ -77,22 +78,24 @@ body {
 }
 
 nav.navbar.navbar-expand-lg.navbar-dark.bg-dark.mb-5.py-1 {
-    background-color: red;
+    background-color: #bc581a;
     -webkit-animation-name: example; /* Safari 4.0 - 8.0 */
     -webkit-animation-duration: 5s; /* Safari 4.0 - 8.0 */
     animation-name: example;
-    animation-duration: 5s;
+    animation-duration: 90s;
     animation-iteration-count: infinite
 }
 
 /* Safari 4.0 - 8.0 */
 @-webkit-keyframes example {
-    0%   {background-color: orange;}
-    100%  {background-color: blue;}
+    0%   {background-color: #00529b;}
+    50%   {background-color: #bc581a;}
+    100%  {background-color: #00529b;}
 }
 
 /* Standard syntax */
 @keyframes example {
-    0%   {background-color: orange;}
-    100%  {background-color: blue;}
+  0%   {background-color: #00529b;}
+  50%   {background-color: #bc581a;}
+  100%  {background-color: #00529b;}
 }
